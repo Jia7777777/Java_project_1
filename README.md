@@ -5,7 +5,7 @@
 ### Questions and Answers
 - What will the application do?  
 It lets you enter information about courses in university.  
-Information might be different course names, course sizes or course professors.  
+Information might be different course names, course times, course professors or course sizes.  
 It will produce a list of courses that fit requirements.
 - Who will use it?  
 University students!
