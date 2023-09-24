@@ -1,10 +1,15 @@
-# My Personal Project
+# Course Tracking
 
-## A subtitle
+## Phase 0
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
+### Questions and Answers
+- What will the application do?  
+It lets you enter information about courses in university.  
+Information might be different course names, course sizes or course professors.  
+It will produce a list of courses that fit requirements.
+- Who will use it?  
+University students!
+- Why is this project of interest to you?  
+Because it reduces the time I spend in searching courses. 
 
-An example of text with **bold** and *italic* fonts.  
+ 
