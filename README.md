@@ -6,7 +6,7 @@
 - What will the application do?  
 It lets you enter information about courses in university course list.  
 Information might be different course names, course times.  
-It will produce a list of courses that fit entered information and are not full.
+It will produce a list of courses that fit entered information and are open for registration.
 - Who will use it?  
 University students!
 - Why is this project of interest to you?  
