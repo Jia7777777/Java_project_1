@@ -5,7 +5,7 @@
 ### Questions and Answers
 - What will the application do?  
 It lets you enter information about courses in university course list.  
-Information might be different course names, course times.  
+Information might be different course names.  
 It will produce a list of courses that fit entered information and are open for registration.
 - Who will use it?  
 University students!
