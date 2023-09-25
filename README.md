@@ -18,8 +18,7 @@ Because it can help students to check their course planning.
 - As a user, I want to be able to view courses in **my course list**.
 - As a user, I want to be able to add courses to **my course list** 
 from **university course list**.
-- As a user, I want to be able to remove courses from **my course list**.  
-- As a user, I want to be able to save **my course list**.
+- As a user, I want to be able to remove courses from **my course list**.
 - As a user, I want to be able to calculate total courses credits in
   **my course list**.
 
