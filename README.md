@@ -1,21 +1,23 @@
-# Course Tracking
+# Course Planning
 
 ## Phase 0
 
 ### Questions and Answers
 - What will the application do?  
-It lets you enter information about courses in university course list.  
-Information might be different course names.  
-It will produce a list of courses that fit entered information and are open for registration.
+There is a **university course list**.  
+Then we can add courses in **university course list** 
+to **my course list**.
 - Who will use it?  
 University students!
 - Why is this project of interest to you?  
-Because it reduces the time I spend in searching courses.  
+Because it can help students to check their course planning.  
 
 ### User Stories  
-- As a user, I want to be able to view the list of courses in university course list.
-- As a user, I want to be able to add a course to university course list.
-- As a user, I want to be able to check the number of courses in university course list.
-- As a user, I want to be able to remove a course from university course list.
-- As a user, I want to be able to check whether a course is in university course list.
+- As a user, I want to be able to view courses in **university course list**.
+- As a user, I want to be able to view courses in **my course list**.
+- As a user, I want to be able to add courses to **my course list** 
+from **university course list**.
+- As a user, I want to be able to remove courses from **my course list**.  
+- As a user, I want to be able to save **my course list**.
+
  
