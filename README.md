@@ -5,7 +5,8 @@
 ### Questions and Answers
 - What will the application do?   
 We can add courses to **my course list**.  
-We can register courses in **my course list**. 
+We can register courses in **my course list**.  
+We can see total course credits of registered courses in **my course list**.
 - Who will use it?  
 University students!
 - Why is this project of interest to you?  
