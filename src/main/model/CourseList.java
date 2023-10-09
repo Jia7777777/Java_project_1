@@ -19,7 +19,13 @@ public class CourseList {
     //          then add a course to the course list and keep order in which they add and return true.
     //          otherwise, do nothing and return false.
     public boolean addCourse(Course c) {
-        if (!this.courseList.contains(c)) {
+        boolean result = false;
+        for (Course next : this.courseList) {
+            if (next.getName() == c.getName() && next.getCredit() == c.getCredit()) {
+                result = true;
+            }
+        }
+        if (!result) {
             this.courseList.add(c);
             return true;
         } else {
@@ -29,10 +35,17 @@ public class CourseList {
 
     // REQUIRES: c.getStatus() == false
     // MODIFIES: this
-    // EFFECTS: if the course in the course list, then remove a course from the course list and return true.
+    // EFFECTS: if the course in the course list and unregistered,
+    //          then remove a course from the course list and return true.
     //          otherwise, do nothing and return false.
     public boolean removeCourse(Course c) {
-        if (this.courseList.contains(c)) {
+        boolean result = false;
+        for (Course next : this.courseList) {
+            if (next.getName() == c.getName() && next.getCredit() == c.getCredit() && next.getStatus() == false) {
+                result = true;
+            }
+        }
+        if (result) {
             this.courseList.remove(c);
             return true;
         } else {

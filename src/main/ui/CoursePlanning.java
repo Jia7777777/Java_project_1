@@ -81,7 +81,7 @@ public class CoursePlanning {
     // EFFECTS: view the course list
     public void doView() {
         if (this.courseList.getCourseList().isEmpty()) {
-            System.out.println("No course in the course list");
+            System.out.println("No course in the course list.");
         } else {
             for (Course next : this.courseList.getCourseList()) {
                 String result = null;
@@ -98,9 +98,9 @@ public class CoursePlanning {
     // MODIFIES: this
     // EFFECTS: conducts addCourse
     public void doAdd() {
-        System.out.println("Enter course name");
+        System.out.println("Enter course name:");
         String name = input.next();
-        System.out.println("Enter course credit");
+        System.out.println("Enter course credit:");
         int credit = input.nextInt();
         if (credit > 0) {
             Course newCourse = new Course(name, credit);
@@ -108,7 +108,7 @@ public class CoursePlanning {
             if (result1) {
                 System.out.println("Course has been added!");
             } else {
-                System.out.println("Course is already in the course list and can not be added again.");
+                System.out.println("Course is failed to add and nothing changes in the course list.");
             }
         } else {
             System.out.println("Credit should be positive and nothing changes in the course list.");
@@ -118,9 +118,9 @@ public class CoursePlanning {
     // MODIFIES: this
     // EFFECTS: conducts removeCourse
     public void doRemove() {
-        System.out.println("Enter course name");
+        System.out.println("Enter course name:");
         String name = input.next();
-        System.out.println("Enter course credit");
+        System.out.println("Enter course credit:");
         int credit = input.nextInt();
         if (credit > 0) {
             Course newCourse = new Course(name, credit);
@@ -128,7 +128,7 @@ public class CoursePlanning {
             if (result1) {
                 System.out.println("Course has been removed!");
             } else {
-                System.out.println("Course is not in the course list and can not be removed.");
+                System.out.println("Course is failed to remove and nothing changes in the course list.");
             }
         } else {
             System.out.println("Credit should be positive and nothing changes in the course list.");
@@ -143,17 +143,18 @@ public class CoursePlanning {
     // MODIFIES: this
     // EFFECTS: conducts markCourseAsRegistered
     public void doRegister() {
-        System.out.println("Enter course name");
+        System.out.println("Enter course name:");
         String name = input.next();
-        System.out.println("Enter course credit");
+        System.out.println("Enter course credit:");
         int credit = input.nextInt();
-        Course newCourse = new Course(name, credit);
-        if (this.courseList.getCourseList().contains(newCourse)) {
-            for (Course next : this.courseList.getCourseList()) {
-                if (name == next.getName() && credit == next.getCredit()) {
-                    System.out.println(next.markCourseAsRegistered());
-                }
+        String result = null;
+        for (Course next : this.courseList.getCourseList()) {
+            if (name == next.getName() && credit == next.getCredit()) {
+                result = next.markCourseAsRegistered();
             }
+        }
+        if (result != null) {
+            System.out.println(result);
         } else {
             System.out.println("There is no such course in the course list and nothing changes in the course list.");
         }
