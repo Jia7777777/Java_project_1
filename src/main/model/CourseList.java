@@ -13,20 +13,30 @@ public class CourseList {
         this.courseList = new ArrayList<>();
     }
 
+    // REQUIRES: c.getStatus() == false
     // MODIFIES: this
     // EFFECTS: if the course is not in the course list,
-    //          then add a course to the course list and keep order in which they add. otherwise, do nothing.
-    public void addCourse(Course c) {
-        if (!courseList.contains(c)) {
-            courseList.add(c);
+    //          then add a course to the course list and keep order in which they add and return true.
+    //          otherwise, do nothing and return false.
+    public boolean addCourse(Course c) {
+        if (!this.courseList.contains(c)) {
+            this.courseList.add(c);
+            return true;
+        } else {
+            return false;
         }
     }
 
+    // REQUIRES: c.getStatus() == false
     // MODIFIES: this
-    // EFFECTS: if the course in the course list, then remove a course from the course list. otherwise, do nothing.
-    public void removeCourse(Course c) {
-        if (courseList.contains(c)) {
-            courseList.remove(c);
+    // EFFECTS: if the course in the course list, then remove a course from the course list and return true.
+    //          otherwise, do nothing and return false.
+    public boolean removeCourse(Course c) {
+        if (this.courseList.contains(c)) {
+            this.courseList.remove(c);
+            return true;
+        } else {
+            return false;
         }
     }
 

@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CourseListTest {
     private CourseList testCourseList;
@@ -30,47 +29,55 @@ public class CourseListTest {
 
     @Test
     void testAddCourseOnce() {
-        testCourseList.addCourse(testCourse1);
+        boolean result1 = testCourseList.addCourse(testCourse1);
         List<Course> courses = testCourseList.getCourseList();
         assertEquals(1, courses.size());
         assertEquals(testCourse1, courses.get(0));
+        assertTrue(result1);
     }
 
     @Test
     void testAddCourseTwice() {
-        testCourseList.addCourse(testCourse1);
-        testCourseList.addCourse(testCourse2);
+        boolean result1 = testCourseList.addCourse(testCourse1);
+        boolean result2 = testCourseList.addCourse(testCourse2);
         List<Course> courses = testCourseList.getCourseList();
         assertEquals(2, courses.size());
         assertEquals(testCourse1, courses.get(0));
         assertEquals(testCourse2, courses.get(1));
+        assertTrue(result1);
+        assertTrue(result2);
     }
 
     @Test
     void testAddSameCourseMultipleTime() {
-        testCourseList.addCourse(testCourse1);
-        testCourseList.addCourse(testCourse2);
-        testCourseList.addCourse(testCourse1);
+        boolean result1 = testCourseList.addCourse(testCourse1);
+        boolean result2 = testCourseList.addCourse(testCourse2);
+        boolean result3 = testCourseList.addCourse(testCourse1);
         List<Course> courses = testCourseList.getCourseList();
         assertEquals(2, courses.size());
         assertEquals(testCourse1, courses.get(0));
         assertEquals(testCourse2, courses.get(1));
+        assertTrue(result1);
+        assertTrue(result2);
+        assertFalse(result3);
     }
 
     @Test
     void testRemoveCourseEmpty() {
-        testCourseList.removeCourse(testCourse1);
+        boolean result1 = testCourseList.removeCourse(testCourse1);
         List<Course> courses = testCourseList.getCourseList();
         assertTrue(courses.isEmpty());
+        assertFalse(result1);
     }
 
     @Test
     void testRemoveCourseInNonemptyButNotRemove() {
         testCourseList.addCourse(testCourse1);
-        testCourseList.removeCourse(testCourse3);
+        boolean result1 = testCourseList.removeCourse(testCourse3);
         List<Course> courses = testCourseList.getCourseList();
         assertEquals(1, courses.size());
         assertEquals(testCourse1, courses.get(0));
+        assertFalse(result1);
     }
 
     @Test
@@ -78,11 +85,13 @@ public class CourseListTest {
         testCourseList.addCourse(testCourse3);
         testCourseList.addCourse(testCourse2);
         testCourseList.addCourse(testCourse1);
-        testCourseList.removeCourse(testCourse2);
-        testCourseList.removeCourse(testCourse3);
+        boolean result1 = testCourseList.removeCourse(testCourse2);
+        boolean result2 = testCourseList.removeCourse(testCourse3);
         List<Course> courses = testCourseList.getCourseList();
         assertEquals(1, courses.size());
         assertEquals(testCourse1, courses.get(0));
+        assertTrue(result1);
+        assertTrue(result2);
     }
 
     @Test
