@@ -13,6 +13,7 @@ public class CourseListTest {
     private Course testCourse2;
     private Course testCourse3;
     private Course testCourse4;
+    private Course testCourse5;
 
     @BeforeEach
     void runBefore() {
@@ -21,6 +22,7 @@ public class CourseListTest {
         testCourse2 = new Course("CPSC210", 4);
         testCourse3 = new Course("MATH220", 3);
         testCourse4 = new Course("MATH100", 3);
+        testCourse5 = new Course("CPSC210", 3);
     }
 
     @Test
@@ -39,7 +41,7 @@ public class CourseListTest {
     }
 
     @Test
-    void testAddCourseTwice() {
+    void testAddCourseTwiceTotallyDifferent() {
         boolean result1 = testCourseList.addCourse(testCourse1);
         boolean result2 = testCourseList.addCourse(testCourse2);
         List<Course> courses = testCourseList.getCourseList();
@@ -51,16 +53,37 @@ public class CourseListTest {
     }
 
     @Test
-    void testAddSameCourseMultipleTime() {
+    void testAddCourseTwiceNameDifferent() {
         boolean result1 = testCourseList.addCourse(testCourse1);
-        boolean result2 = testCourseList.addCourse(testCourse2);
-        boolean result3 = testCourseList.addCourse(testCourse1);
+        boolean result2 = testCourseList.addCourse(testCourse3);
         List<Course> courses = testCourseList.getCourseList();
         assertEquals(2, courses.size());
         assertEquals(testCourse1, courses.get(0));
-        assertEquals(testCourse2, courses.get(1));
+        assertEquals(testCourse3, courses.get(1));
         assertTrue(result1);
         assertTrue(result2);
+    }
+
+    @Test
+    void testAddCourseTwiceCreditDifferent() {
+        boolean result1 = testCourseList.addCourse(testCourse2);
+        boolean result2 = testCourseList.addCourse(testCourse5);
+        List<Course> courses = testCourseList.getCourseList();
+        assertEquals(2, courses.size());
+        assertEquals(testCourse2, courses.get(0));
+        assertEquals(testCourse5, courses.get(1));
+        assertTrue(result1);
+        assertTrue(result2);
+    }
+
+    @Test
+    void testAddCourseSameTwice() {
+        boolean result1 = testCourseList.addCourse(testCourse1);
+        boolean result3 = testCourseList.addCourse(testCourse4);
+        List<Course> courses = testCourseList.getCourseList();
+        assertEquals(1, courses.size());
+        assertEquals(testCourse1, courses.get(0));
+        assertTrue(result1);
         assertFalse(result3);
     }
     @Test
@@ -88,9 +111,9 @@ public class CourseListTest {
     }
 
     @Test
-    void testRemoveCourseInNonemptyButNotRemove() {
+    void testRemoveCourseNameCreditDifferentStatusF() {
         testCourseList.addCourse(testCourse1);
-        boolean result1 = testCourseList.removeCourse(testCourse3);
+        boolean result1 = testCourseList.removeCourse(testCourse2);
         List<Course> courses = testCourseList.getCourseList();
         assertEquals(1, courses.size());
         assertEquals(testCourse1, courses.get(0));
@@ -98,11 +121,30 @@ public class CourseListTest {
     }
 
     @Test
-    void testRemoveCourseForRegisteredCourse() {
+    void testRemoveCourseNameSameCreditDifferentStatusF() {
+        testCourseList.addCourse(testCourse2);
+        boolean result1 = testCourseList.removeCourse(testCourse5);
+        List<Course> courses = testCourseList.getCourseList();
+        assertEquals(1, courses.size());
+        assertEquals(testCourse2, courses.get(0));
+        assertFalse(result1);
+    }
+
+    @Test
+    void testRemoveCourseNameCreditSameStatusF() {
+        testCourseList.addCourse(testCourse1);
+        boolean result1 = testCourseList.removeCourse(testCourse1);
+        List<Course> courses = testCourseList.getCourseList();
+        assertTrue(courses.isEmpty());
+        assertTrue(result1);
+    }
+
+    @Test
+    void testRemoveCourseNameCreditSameStatusT() {
         testCourseList.addCourse(testCourse1);
         List<Course> upToNow = testCourseList.getCourseList();
         upToNow.get(0).markCourseAsRegistered();
-        boolean result1 = testCourseList.removeCourse(testCourse1);
+        boolean result1 = testCourseList.removeCourse(testCourse4);
         List<Course> courses = testCourseList.getCourseList();
         assertEquals(1, courses.size());
         assertEquals(testCourse1, courses.get(0));
