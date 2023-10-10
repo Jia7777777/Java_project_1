@@ -78,6 +78,7 @@ public class CoursePlanning {
         System.out.println("\tq -> quit");
     }
 
+    // MODIFIES: this
     // EFFECTS: view the course list
     public void doView() {
         if (this.courseList.getCourseList().isEmpty()) {
@@ -135,6 +136,7 @@ public class CoursePlanning {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: conducts totalCreditOfRegisteredCourse
     public void doCalculate() {
         System.out.println("total credits of registered courses: " + this.courseList.totalCreditOfRegisteredCourse());
@@ -149,7 +151,7 @@ public class CoursePlanning {
         int credit = input.nextInt();
         String result = null;
         for (Course next : this.courseList.getCourseList()) {
-            if (name == next.getName() && credit == next.getCredit()) {
+            if (next.getName().equals(name) && credit == next.getCredit()) {
                 result = next.markCourseAsRegistered();
             }
         }
@@ -163,7 +165,20 @@ public class CoursePlanning {
     // MODIFIES: this
     // EFFECTS: conducts markCourseAsUnregistered
     public void doUnregister() {
-
+        System.out.println("Enter course name:");
+        String name = input.next();
+        System.out.println("Enter course credit:");
+        int credit = input.nextInt();
+        String result = null;
+        for (Course next : this.courseList.getCourseList()) {
+            if (next.getName().equals(name) && credit == next.getCredit()) {
+                result = next.markCourseAsUnregistered();
+            }
+        }
+        if (result != null) {
+            System.out.println(result);
+        } else {
+            System.out.println("There is no such course in the course list and nothing changes in the course list.");
+        }
     }
-
 }

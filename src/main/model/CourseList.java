@@ -21,7 +21,7 @@ public class CourseList {
     public boolean addCourse(Course c) {
         boolean result = false;
         for (Course next : this.courseList) {
-            if (next.getName() == c.getName() && next.getCredit() == c.getCredit()) {
+            if (next.getName().equals(c.getName()) && next.getCredit() == c.getCredit()) {
                 result = true;
             }
         }
@@ -41,7 +41,7 @@ public class CourseList {
     public boolean removeCourse(Course c) {
         boolean result = false;
         for (Course next : this.courseList) {
-            if (next.getName() == c.getName() && next.getCredit() == c.getCredit() && next.getStatus() == false) {
+            if (next.getName().equals(c.getName()) && next.getCredit() == c.getCredit() && !next.getStatus()) {
                 result = true;
             }
         }
