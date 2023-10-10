@@ -9,7 +9,7 @@ public class Course {
 
     private String name;
     private int credit;
-    private boolean status;
+    private boolean status;  // false is unregistered and true is registered
 
     // REQUIRES: credit > 0, name must be a non-zero length
     // EFFECTS: create a course with given name and credit, with unregistered status applied (false)

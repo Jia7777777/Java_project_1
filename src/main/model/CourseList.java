@@ -40,13 +40,18 @@ public class CourseList {
     //          otherwise, do nothing and return false.
     public boolean removeCourse(Course c) {
         boolean result = false;
+        int pos = -1;
         for (Course next : this.courseList) {
             if (next.getName().equals(c.getName()) && next.getCredit() == c.getCredit() && !next.getStatus()) {
                 result = true;
+                pos++;
+                break;
+            } else {
+                pos++;
             }
         }
         if (result) {
-            this.courseList.remove(c);
+            this.courseList.remove(pos);
             return true;
         } else {
             return false;
