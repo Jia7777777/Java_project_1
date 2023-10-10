@@ -44,7 +44,7 @@ class CourseTest {
         testCourse1.markCourseAsRegistered();
         String result1 = testCourse1.markCourseAsRegistered();
         assertTrue(testCourse1.getStatus());
-        assertEquals("Course was registered in the past and nothing changes now.", result1);
+        assertEquals("Course was registered in the past and nothing changes in the course list.", result1);
     }
 
     @Test
@@ -71,7 +71,7 @@ class CourseTest {
     void testMarkCourseAsUnregisteredForUnregisteredCourse() {
         String result1 = testCourse1.markCourseAsUnregistered();
         assertFalse(testCourse1.getStatus());
-        assertEquals("Course was unregistered in the past and nothing changes now.", result1);
+        assertEquals("Course was unregistered in the past and nothing changes in the course list.", result1);
     }
 
 }

@@ -3,9 +3,10 @@ package model;
 // Represent a course having a course name, a course credits and a course registration status
 public class Course {
     public static final String SENTENCE1 = "Course is successfully registered!";
-    public static final String SENTENCE2 = "Course was registered in the past and nothing changes now.";
+    public static final String SENTENCE2 = "Course was registered in the past and nothing changes in the course list.";
     public static final String SENTENCE3 = "Course is unregistered.";
-    public static final String SENTENCE4 = "Course was unregistered in the past and nothing changes now.";
+    public static final String SENTENCE4 =
+            "Course was unregistered in the past and nothing changes in the course list.";
 
     private String name;
     private int credit;
