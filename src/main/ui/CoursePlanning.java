@@ -61,6 +61,10 @@ public class CoursePlanning {
             doRegister();
         } else if (command.equals("0")) {
             doUnregister();
+        } else if (command.equals("s")) {
+            doSave();
+        } else if (command.equals("l")) {
+            doLoad();
         } else {
             System.out.println("Selection invalid...");
         }
@@ -75,6 +79,8 @@ public class CoursePlanning {
         System.out.println("\t1 -> register course");
         System.out.println("\t0 -> unregister course");
         System.out.println("\tc -> calculate total credits of register courses");
+        System.out.println("\ts -> save course list to file");
+        System.out.println("\tl -> load course list from file");
         System.out.println("\tq -> quit");
     }
 
@@ -180,5 +186,14 @@ public class CoursePlanning {
         } else {
             System.out.println("There is no such course in the course list and nothing changes in the course list.");
         }
+    }
+
+    // EFFECTS: saves course list to file
+    public void doSave() {
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads course list to file
+    public void doLoad() {
     }
 }
