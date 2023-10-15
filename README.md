@@ -17,6 +17,8 @@ Because it can help students to check their course planning.
 - As a user, I want to be able to view courses in **my course list**.
 - As a user, I want to be able to mark a course as registered.
 - As a user, I want to be able to remove courses from **my course list**.
-- As a user, I want to be able to see total course credits of all registered courses in **my course list**.
+- As a user, I want to be able to see total course credits of all registered courses in **my course list**.  
+- As a user, I want to be able to save **my course list** to file (if I choose).
+- As a user, I want to be able to be able to load **my course list** from file (if I choose)
 
  
