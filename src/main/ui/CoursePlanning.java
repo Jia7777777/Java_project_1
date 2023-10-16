@@ -2,17 +2,25 @@ package ui;
 
 import model.Course;
 import model.CourseList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Course Planning application
 public class CoursePlanning {
 
+    private static final String JSON_STORE = "./data/courseList.json";
     private Scanner input;
     private CourseList courseList;
+    private JsonReader jsonReader;
+    private JsonWriter jsonWriter;
+
 
     // EFFECTS: run Course Planning application
-    public CoursePlanning() {
+    public CoursePlanning() throws FileNotFoundException {
         runCoursePlanning();
     }
 
@@ -44,6 +52,8 @@ public class CoursePlanning {
         courseList = new CourseList();
         input = new Scanner(System.in);
         input.useDelimiter("\n");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // MODIFIES: this
@@ -190,10 +200,24 @@ public class CoursePlanning {
 
     // EFFECTS: saves course list to file
     public void doSave() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(courseList);
+            jsonWriter.close();
+            System.out.println("Saved " + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: loads course list to file
     public void doLoad() {
+        try {
+            courseList = jsonReader.read();
+            System.out.println("Loaded " + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }
