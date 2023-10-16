@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represent a course having a course name, a course credits and a course registration status
-public class Course {
+public class Course implements Writable {
     public static final String SENTENCE1 = "Course is successfully registered!";
     public static final String SENTENCE2 = "Course was registered in the past and nothing changes in the course list.";
     public static final String SENTENCE3 = "Course is unregistered.";
@@ -56,5 +59,14 @@ public class Course {
 
     public boolean getStatus() {
         return this.status;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("credit", credit);
+        json.put("status", status);
+        return json;
     }
 }
