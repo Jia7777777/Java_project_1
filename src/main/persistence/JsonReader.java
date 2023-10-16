@@ -61,8 +61,15 @@ public class JsonReader {
     private void addCourse(CourseList cl, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         int credit = jsonObject.getInt("credit");
+        boolean status = jsonObject.getBoolean("status");
         Course course = new Course(name, credit);
-        cl.addCourse(course);
+        if (course.getStatus() == status) {
+            cl.addCourse(course);
+        } else {
+            course.markCourseAsRegistered();
+            cl.addCourse(course);
+        }
+
     }
 
 }
