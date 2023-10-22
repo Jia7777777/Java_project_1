@@ -1,0 +1,28 @@
+Index: data/courseList.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\"courseList\": [\r\n    {\r\n        \"name\": \"A\",\r\n        \"credit\": 1,\r\n        \"status\": false\r\n    },\r\n    {\r\n        \"name\": \"BBBBBBBBBBBBBBBBBBBBBB\",\r\n        \"credit\": 1,\r\n        \"status\": false\r\n    }\r\n]}
+===================================================================
+diff --git a/data/courseList.json b/data/courseList.json
+--- a/data/courseList.json	
++++ b/data/courseList.json	
+@@ -1,12 +1,5 @@
+-{"courseList": [
+-    {
+-        "name": "A",
+-        "credit": 1,
+-        "status": false
+-    },
+-    {
+-        "name": "BBBBBBBBBBBBBBBBBBBBBB",
+-        "credit": 1,
+-        "status": false
+-    }
+-]}
+\ No newline at end of file
++{"courseList": [{
++    "name": "A",
++    "credit": 1,
++    "status": true
++}]}
+\ No newline at end of file

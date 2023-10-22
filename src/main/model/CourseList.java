@@ -19,7 +19,7 @@ public class CourseList implements Writable {
 
     // REQUIRES: c.getStatus() == false
     // MODIFIES: this
-    // EFFECTS: if the course is not in the course list,
+    // EFFECTS: if the course is not in the course list (which means that either name or credit are different),
     //          then add a course to the course list and keep order in which they add and return true.
     //          otherwise, do nothing and return false.
     public boolean addCourse(Course c) {
