@@ -1,0 +1,12 @@
+{"courseList": [
+    {
+        "name": "MATH101",
+        "credit": 3,
+        "status": true
+    },
+    {
+        "name": "CPSC121",
+        "credit": 4,
+        "status": false
+    }
+]}
