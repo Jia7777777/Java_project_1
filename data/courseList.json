@@ -8,5 +8,10 @@
         "name": "MATH100",
         "credit": 3,
         "status": false
+    },
+    {
+        "name": "GEOS102",
+        "credit": 3,
+        "status": true
     }
 ]}

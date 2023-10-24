@@ -12,6 +12,8 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 // Represents a reader that reads course list from JSON data stored in file
+// Code is influenced by the JsonSerizalizationDemo.
+// JsonSerizalizationDemo link: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonReader {
     private String source;
 

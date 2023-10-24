@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 // Represents a writer that writes JSON representation of course list to file
+// Code is influenced by the JsonSerizalizationDemo.
+// JsonSerizalizationDemo link: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonWriter {
 
     private static final int TAB = 4;
