@@ -5,7 +5,7 @@ import model.CourseList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -14,8 +14,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -68,6 +67,8 @@ public class GUI extends JPanel implements ListSelectionListener {
         createPanel(listScrollPane);
     }
 
+    // MODIFIES: this
+    // EFFECTS: set up JTextField
     private void setJTextField(AddListener addListener) {
         courseName = new JTextField(10);
         courseName.addActionListener(addListener);
@@ -78,18 +79,24 @@ public class GUI extends JPanel implements ListSelectionListener {
         courseCredit.getDocument().addDocumentListener(addListener);
     }
 
+    // MODIFIES: this
+    // EFFECTS: set up load button
     private void setLoadButton() {
         loadButton = new JButton(loadString);
         loadButton.setActionCommand(loadString);
         loadButton.addActionListener(new LoadListener());
     }
 
+    // MODIFIES: this
+    // EFFECTS: set up save button
     private void setSaveButton() {
         saveButton = new JButton(saveString);
         saveButton.setActionCommand(saveString);
         saveButton.addActionListener(new SaveListener());
     }
 
+    // MODIFIES: this
+    // EFFECTS: set up remove button
     private void setRemoveButton() {
         removeButton = new JButton(removeString);
         removeButton.setActionCommand(removeString);
@@ -97,6 +104,8 @@ public class GUI extends JPanel implements ListSelectionListener {
         removeButton.setEnabled(false);
     }
 
+    // MODIFIES: this
+    // EFFECTS: set up add button
     private AddListener setAddButton() {
         addButton = new JButton(addString);
         AddListener addListener = new AddListener(addButton);
@@ -141,6 +150,9 @@ public class GUI extends JPanel implements ListSelectionListener {
          *
          * @param e the event to be processed
          */
+
+        // MODIFIES: this
+        // EFFECTS: do save
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -164,6 +176,9 @@ public class GUI extends JPanel implements ListSelectionListener {
          *
          * @param e the event to be processed
          */
+
+        // MODIFIES: this
+        // EFFECTS: do load
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -186,6 +201,9 @@ public class GUI extends JPanel implements ListSelectionListener {
          *
          * @param e the event to be processed
          */
+
+        // MODIFIES: this
+        // EFFECTS: do remove
         @Override
         public void actionPerformed(ActionEvent e) {
             //This method can be called only if
@@ -217,6 +235,9 @@ public class GUI extends JPanel implements ListSelectionListener {
          *
          * @param e the event to be processed
          */
+
+        // MODIFIES: this
+        // EFFECTS: do add
         @Override
         public void actionPerformed(ActionEvent e) {
             String name = courseName.getText();
@@ -244,6 +265,8 @@ public class GUI extends JPanel implements ListSelectionListener {
             }
         }
 
+        // MODIFIES: this
+        // EFFECTS: set JTextField to original state
         private void reset() {
             courseName.requestFocusInWindow();
             courseName.setText("");
@@ -327,6 +350,9 @@ public class GUI extends JPanel implements ListSelectionListener {
      * this method should be invoked from the
      * event-dispatching thread.
      */
+
+    // MODIFIES: this
+    // EFFECTS: create GUI and show it
     private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("CoursePlanning");
