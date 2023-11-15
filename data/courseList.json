@@ -1,17 +1,12 @@
 {"courseList": [
     {
-        "name": "CPSC110",
-        "credit": 4,
-        "status": true
-    },
-    {
-        "name": "MATH100",
-        "credit": 3,
+        "name": "A",
+        "credit": 1,
         "status": false
     },
     {
-        "name": "GEOS102",
-        "credit": 3,
+        "name": "B",
+        "credit": 1,
         "status": true
     }
 ]}
