@@ -103,8 +103,9 @@ public class GUI extends JPanel implements ListSelectionListener {
         return addListener;
     }
 
+    // MODIFIES: this
+    // EFFECTS: create a panel with BoxLayOut
     private void createPanel(JScrollPane listScrollPane) {
-        //Create a panel that uses BoxLayout.
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane,
                 BoxLayout.LINE_AXIS));
@@ -144,9 +145,9 @@ public class GUI extends JPanel implements ListSelectionListener {
                 jsonWriter.write(courseList);
                 jsonWriter.close();
                 JOptionPane.showMessageDialog(saveButton,
-                        "Save successfully!", "Success", JOptionPane.PLAIN_MESSAGE);
+                        "Save successfully!", "Success", JOptionPane.PLAIN_MESSAGE); // get an icon
             } catch (FileNotFoundException exception) {
-                JOptionPane.showMessageDialog(saveButton, "Unable to save!", "Fail", 0);
+                JOptionPane.showMessageDialog(saveButton, "Unable to save!", "Warning", 0);
             }
 
         }
@@ -168,7 +169,7 @@ public class GUI extends JPanel implements ListSelectionListener {
                     listModel.addElement(next.getName() + " " + next.getCredit() + " Unregistered");
                 }
             } catch (IOException exception) {
-                JOptionPane.showMessageDialog(saveButton, "Unable to load!", "Fail", 0);
+                JOptionPane.showMessageDialog(saveButton, "Unable to load!", "Warning", 0);
             }
         }
     }
@@ -215,8 +216,7 @@ public class GUI extends JPanel implements ListSelectionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String name = courseName.getText();
-            String c = courseCredit.getText();
-            int credit = Integer.valueOf(c);
+            int credit = Integer.valueOf(courseCredit.getText());
             Course addCourse = new Course(name, credit);
             List<Course> courses = courseList.getCourseList();
             boolean result = false;
@@ -231,9 +231,11 @@ public class GUI extends JPanel implements ListSelectionListener {
                 courseName.selectAll();
                 courseCredit.requestFocusInWindow();
                 courseCredit.selectAll();
+                JOptionPane.showMessageDialog(addButton,
+                        "You can not add same course twice!", "Warning", 0);
             } else {
                 courses.add(addCourse);
-                listModel.addElement(name + " " + c + " Unregistered");
+                listModel.addElement(name + " " + courseCredit.getText() + " Unregistered");
                 reset();
             }
         }
