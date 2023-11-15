@@ -1,22 +1,12 @@
 {"courseList": [
     {
-        "name": "b",
-        "credit": 1,
-        "status": false
-    },
-    {
-        "name": "c",
-        "credit": 1,
-        "status": false
-    },
-    {
-        "name": "a",
-        "credit": 2,
-        "status": false
-    },
-    {
         "name": "d",
-        "credit": 1,
+        "credit": 4,
+        "status": false
+    },
+    {
+        "name": "s",
+        "credit": 2,
         "status": false
     }
 ]}

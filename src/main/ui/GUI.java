@@ -5,6 +5,7 @@ import model.CourseList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -13,6 +14,8 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -144,8 +147,9 @@ public class GUI extends JPanel implements ListSelectionListener {
                 jsonWriter.open();
                 jsonWriter.write(courseList);
                 jsonWriter.close();
+                Icon icon = new ImageIcon("data/image/icon.png");
                 JOptionPane.showMessageDialog(saveButton,
-                        "Save successfully!", "Success", JOptionPane.PLAIN_MESSAGE); // get an icon
+                        "", "Success", JOptionPane.PLAIN_MESSAGE, icon); // get an icon
             } catch (FileNotFoundException exception) {
                 JOptionPane.showMessageDialog(saveButton, "Unable to save!", "Warning", 0);
             }
