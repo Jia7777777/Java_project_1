@@ -122,25 +122,25 @@ public class GUI extends JPanel implements ListSelectionListener {
         buttonPane.setLayout(new BoxLayout(buttonPane,
                 BoxLayout.LINE_AXIS));
         buttonPane.add(removeButton);
-        buttonPane.add(Box.createHorizontalStrut(5));
-        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
-        buttonPane.add(Box.createHorizontalStrut(5));
+        setBoundary(buttonPane);
         buttonPane.add(courseName);
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(courseCredit);
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(addButton);
-        buttonPane.add(Box.createHorizontalStrut(5));
-        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
-        buttonPane.add(Box.createHorizontalStrut(5));
+        setBoundary(buttonPane);
         buttonPane.add(saveButton);
-        buttonPane.add(Box.createHorizontalStrut(5));
-        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
-        buttonPane.add(Box.createHorizontalStrut(5));
+        setBoundary(buttonPane);
         buttonPane.add(loadButton);
         buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         add(listScrollPane, BorderLayout.CENTER);
         add(buttonPane, BorderLayout.PAGE_END);
+    }
+
+    private static void setBoundary(JPanel buttonPane) {
+        buttonPane.add(Box.createHorizontalStrut(5));
+        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
+        buttonPane.add(Box.createHorizontalStrut(5));
     }
 
     class SaveListener implements ActionListener {
@@ -244,18 +244,19 @@ public class GUI extends JPanel implements ListSelectionListener {
             int credit = Integer.valueOf(courseCredit.getText());
             Course addCourse = new Course(name, credit);
             List<Course> courses = courseList.getCourseList();
+            boolean lessThanOrEqualTo0 = credit <= 0;
             boolean result = false;
             for (Course next : courses) {
                 if (next.getName().equals(name) && next.getCredit() == credit) {
                     result = true;
                 }
             }
-            if (result) {
-                Toolkit.getDefaultToolkit().beep();
-                courseName.requestFocusInWindow();
-                courseName.selectAll();
-                courseCredit.requestFocusInWindow();
-                courseCredit.selectAll();
+            if (lessThanOrEqualTo0) {
+                warning();
+                JOptionPane.showMessageDialog(addButton,
+                        "You should have positive course credit!", "Warning", 0);
+            } else if (result) {
+                warning();
                 JOptionPane.showMessageDialog(addButton,
                         "You can not add same course twice!", "Warning", 0);
             } else {
@@ -263,6 +264,14 @@ public class GUI extends JPanel implements ListSelectionListener {
                 listModel.addElement(name + " " + courseCredit.getText() + " Unregistered");
                 reset();
             }
+        }
+
+        private void warning() {
+            Toolkit.getDefaultToolkit().beep();
+            courseName.requestFocusInWindow();
+            courseName.selectAll();
+            courseCredit.requestFocusInWindow();
+            courseCredit.selectAll();
         }
 
         // MODIFIES: this
