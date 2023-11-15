@@ -2,6 +2,8 @@ package ui;
 
 import model.Course;
 import model.CourseList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -11,6 +13,8 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public class GUI extends JPanel implements ListSelectionListener {
@@ -21,10 +25,15 @@ public class GUI extends JPanel implements ListSelectionListener {
     private static final String removeString = "Remove";
     private static final String saveString = "Save";
     private static final String loadString = "Load";
+    private static final String JSON_STORE_GUI = "./data/courseListGUI.json";
     private JButton removeButton;
+    private JButton saveButton;
+    private JButton loadButton;
     private JTextField courseName;
     private JTextField courseCredit;
     private CourseList courseList;
+    private JsonReader jsonReader;
+    private JsonWriter jsonWriter;
 
     public GUI() {
         super(new BorderLayout());
@@ -32,6 +41,8 @@ public class GUI extends JPanel implements ListSelectionListener {
 
         listModel = new DefaultListModel<>();
         courseList = new CourseList();
+        jsonWriter = new JsonWriter(JSON_STORE_GUI);
+        jsonReader = new JsonReader(JSON_STORE_GUI);
 
         //Create the list and put it in a scroll pane.
         list = new JList(listModel);
@@ -50,6 +61,15 @@ public class GUI extends JPanel implements ListSelectionListener {
         removeButton = new JButton(removeString);
         removeButton.setActionCommand(removeString);
         removeButton.addActionListener(new RemoveListener());
+        removeButton.setEnabled(false);
+
+        saveButton = new JButton(saveString);
+        saveButton.setActionCommand(saveString);
+        saveButton.addActionListener(new SaveListener());
+
+        loadButton = new JButton(loadString);
+        loadButton.setActionCommand(loadString);
+        loadButton.addActionListener(new LoadListener());
 
         courseName = new JTextField(10);
         courseName.addActionListener(addListener);
@@ -72,9 +92,59 @@ public class GUI extends JPanel implements ListSelectionListener {
         buttonPane.add(courseCredit);
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(addButton);
+        buttonPane.add(Box.createHorizontalStrut(5));
+        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
+        buttonPane.add(Box.createHorizontalStrut(5));
+        buttonPane.add(saveButton);
+        buttonPane.add(Box.createHorizontalStrut(5));
+        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
+        buttonPane.add(Box.createHorizontalStrut(5));
+        buttonPane.add(loadButton);
         buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         add(listScrollPane, BorderLayout.CENTER);
         add(buttonPane, BorderLayout.PAGE_END);
+    }
+
+    class SaveListener implements ActionListener {
+
+        /**
+         * Invoked when an action occurs.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                jsonWriter.open();
+                jsonWriter.write(courseList);
+                jsonWriter.close();
+                JOptionPane.showMessageDialog(saveButton,
+                        "Save successfully!", "Success", JOptionPane.PLAIN_MESSAGE);
+            } catch (FileNotFoundException exception) {
+                JOptionPane.showMessageDialog(saveButton, "Unable to save!", "Fail", 0);
+            }
+
+        }
+    }
+
+    class LoadListener implements ActionListener {
+
+        /**
+         * Invoked when an action occurs.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                courseList = jsonReader.read();
+                for (Course next : courseList.getCourseList()) {
+                    listModel.addElement(next.getName() + " " + next.getCredit() + " Unregistered");
+                }
+            } catch (IOException exception) {
+                JOptionPane.showMessageDialog(saveButton, "Unable to load!", "Fail", 0);
+            }
+        }
     }
 
 
@@ -135,7 +205,6 @@ public class GUI extends JPanel implements ListSelectionListener {
                 courseName.selectAll();
                 courseCredit.requestFocusInWindow();
                 courseCredit.selectAll();
-                return;
             } else {
                 courses.add(addCourse);
                 listModel.addElement(name + " " + c + " Unregistered");
@@ -192,7 +261,7 @@ public class GUI extends JPanel implements ListSelectionListener {
         }
 
         private boolean handleEmptyTextField(DocumentEvent e) {
-            if (courseName.getText().length() != 0 && courseCredit.getText().length() != 0) {
+            if (e.getDocument().getLength() <= 0) {
                 button.setEnabled(false);
                 alreadyEnabled = false;
                 return true;
