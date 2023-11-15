@@ -137,6 +137,8 @@ public class GUI extends JPanel implements ListSelectionListener {
         add(buttonPane, BorderLayout.PAGE_END);
     }
 
+    // MODIFIES: this
+    // EFFECTS: set gap between each button
     private static void setBoundary(JPanel buttonPane) {
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
@@ -185,7 +187,11 @@ public class GUI extends JPanel implements ListSelectionListener {
                 listModel.removeAllElements();
                 courseList = jsonReader.read();
                 for (Course next : courseList.getCourseList()) {
-                    listModel.addElement(next.getName() + " " + next.getCredit() + " Unregistered");
+                    if (next.getStatus()) {
+                        listModel.addElement(next.getName() + " " + next.getCredit() + " Registered");
+                    } else {
+                        listModel.addElement(next.getName() + " " + next.getCredit() + " Unregistered");
+                    }
                 }
             } catch (IOException exception) {
                 JOptionPane.showMessageDialog(saveButton, "Unable to load!", "Warning", 0);
@@ -244,21 +250,18 @@ public class GUI extends JPanel implements ListSelectionListener {
             int credit = Integer.valueOf(courseCredit.getText());
             Course addCourse = new Course(name, credit);
             List<Course> courses = courseList.getCourseList();
-            boolean lessThanOrEqualTo0 = credit <= 0;
             boolean result = false;
             for (Course next : courses) {
                 if (next.getName().equals(name) && next.getCredit() == credit) {
                     result = true;
                 }
             }
-            if (lessThanOrEqualTo0) {
-                warning();
-                JOptionPane.showMessageDialog(addButton,
-                        "You should have positive course credit!", "Warning", 0);
+            if (name.isBlank()) {
+                emptyCourseName();
+            } else if (credit <= 0) {
+                nonPositiveCourseCredit();
             } else if (result) {
-                warning();
-                JOptionPane.showMessageDialog(addButton,
-                        "You can not add same course twice!", "Warning", 0);
+                addSameCourseTwice();
             } else {
                 courses.add(addCourse);
                 listModel.addElement(name + " " + courseCredit.getText() + " Unregistered");
@@ -266,6 +269,32 @@ public class GUI extends JPanel implements ListSelectionListener {
             }
         }
 
+        // MODIFIES: this
+        // EFFECTS: produce a message dialog for adding same course twice
+        private void addSameCourseTwice() {
+            warning();
+            JOptionPane.showMessageDialog(addButton,
+                    "You can not add same course twice!", "Warning", 0);
+        }
+
+        // MODIFIES: this
+        // EFFECTS: produce a message dialog for entering non-positive course credit
+        private void nonPositiveCourseCredit() {
+            warning();
+            JOptionPane.showMessageDialog(addButton,
+                    "You should have positive course credit!", "Warning", 0);
+        }
+
+        // MODIFIES: this
+        // EFFECTS: produce a message dialog for adding empty course name
+        private void emptyCourseName() {
+            warning();
+            JOptionPane.showMessageDialog(addButton,
+                    "You can not have empty course name!", "Warning", 0);
+        }
+
+        // MODIFIES: this
+        // EFFECTS: warning for special cases
         private void warning() {
             Toolkit.getDefaultToolkit().beep();
             courseName.requestFocusInWindow();
@@ -318,12 +347,16 @@ public class GUI extends JPanel implements ListSelectionListener {
             }
         }
 
+        // MODIFIES: this
+        // EFFECTS: enable add button
         private void enableButton() {
             if (!alreadyEnabled) {
                 button.setEnabled(true);
             }
         }
 
+        // MODIFIES: this
+        // EFFECTS: handle both text field are empty
         private boolean handleEmptyTextField(DocumentEvent e) {
             if (e.getDocument().getLength() <= 0) {
                 button.setEnabled(false);
@@ -354,12 +387,6 @@ public class GUI extends JPanel implements ListSelectionListener {
         }
     }
 
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
-
     // MODIFIES: this
     // EFFECTS: create GUI and show it
     private static void createAndShowGUI() {
@@ -378,8 +405,6 @@ public class GUI extends JPanel implements ListSelectionListener {
     }
 
     public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();
