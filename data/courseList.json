@@ -1,12 +1,5 @@
-{"courseList": [
-    {
-        "name": "A",
-        "credit": 1,
-        "status": false
-    },
-    {
-        "name": "B",
-        "credit": 1,
-        "status": true
-    }
-]}
+{"courseList": [{
+    "name": "a",
+    "credit": 1,
+    "status": false
+}]}

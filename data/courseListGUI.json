@@ -5,8 +5,13 @@
         "status": false
     },
     {
-        "name": "a",
+        "name": "c",
         "credit": 1,
+        "status": false
+    },
+    {
+        "name": "a",
+        "credit": 2,
         "status": false
     }
 ]}

@@ -26,6 +26,7 @@ public class GUI extends JPanel implements ListSelectionListener {
     private static final String saveString = "Save";
     private static final String loadString = "Load";
     private static final String JSON_STORE_GUI = "./data/courseListGUI.json";
+    private JButton addButton;
     private JButton removeButton;
     private JButton saveButton;
     private JButton loadButton;
@@ -37,7 +38,6 @@ public class GUI extends JPanel implements ListSelectionListener {
 
     public GUI() {
         super(new BorderLayout());
-
 
         listModel = new DefaultListModel<>();
         courseList = new CourseList();
@@ -52,25 +52,20 @@ public class GUI extends JPanel implements ListSelectionListener {
         list.setVisibleRowCount(10);
         JScrollPane listScrollPane = new JScrollPane(list);
 
-        JButton addButton = new JButton(addString);
-        AddListener addListener = new AddListener(addButton);
-        addButton.setActionCommand(addString);
-        addButton.addActionListener(addListener);
-        addButton.setEnabled(false);
+        AddListener addListener = setAddButton();
 
-        removeButton = new JButton(removeString);
-        removeButton.setActionCommand(removeString);
-        removeButton.addActionListener(new RemoveListener());
-        removeButton.setEnabled(false);
+        setRemoveButton();
 
-        saveButton = new JButton(saveString);
-        saveButton.setActionCommand(saveString);
-        saveButton.addActionListener(new SaveListener());
+        setSaveButton();
 
-        loadButton = new JButton(loadString);
-        loadButton.setActionCommand(loadString);
-        loadButton.addActionListener(new LoadListener());
+        setLoadButton();
 
+        setJTextField(addListener);
+
+        createPanel(listScrollPane);
+    }
+
+    private void setJTextField(AddListener addListener) {
         courseName = new JTextField(10);
         courseName.addActionListener(addListener);
         courseName.getDocument().addDocumentListener(addListener);
@@ -78,7 +73,37 @@ public class GUI extends JPanel implements ListSelectionListener {
         courseCredit = new JTextField(10);
         courseCredit.addActionListener(addListener);
         courseCredit.getDocument().addDocumentListener(addListener);
+    }
 
+    private void setLoadButton() {
+        loadButton = new JButton(loadString);
+        loadButton.setActionCommand(loadString);
+        loadButton.addActionListener(new LoadListener());
+    }
+
+    private void setSaveButton() {
+        saveButton = new JButton(saveString);
+        saveButton.setActionCommand(saveString);
+        saveButton.addActionListener(new SaveListener());
+    }
+
+    private void setRemoveButton() {
+        removeButton = new JButton(removeString);
+        removeButton.setActionCommand(removeString);
+        removeButton.addActionListener(new RemoveListener());
+        removeButton.setEnabled(false);
+    }
+
+    private AddListener setAddButton() {
+        addButton = new JButton(addString);
+        AddListener addListener = new AddListener(addButton);
+        addButton.setActionCommand(addString);
+        addButton.addActionListener(addListener);
+        addButton.setEnabled(false);
+        return addListener;
+    }
+
+    private void createPanel(JScrollPane listScrollPane) {
         //Create a panel that uses BoxLayout.
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane,
@@ -137,6 +162,7 @@ public class GUI extends JPanel implements ListSelectionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
+                listModel.removeAllElements();
                 courseList = jsonReader.read();
                 for (Course next : courseList.getCourseList()) {
                     listModel.addElement(next.getName() + " " + next.getCredit() + " Unregistered");
