@@ -279,7 +279,7 @@ public class GUI extends JPanel implements ListSelectionListener {
         //          otherwise, general add course and reset JTextField
         private void threeCases(Course addCourse, List<Course> courses, boolean result) {
             if (Integer.parseInt(courseCredit.getText()) <= 0) {
-                nonPositiveCourseCredit();
+                invalidCourseCredit();
             } else if (result) {
                 addSameCourseTwice();
             } else {
@@ -304,14 +304,6 @@ public class GUI extends JPanel implements ListSelectionListener {
             warning();
             JOptionPane.showMessageDialog(addButton,
                     "You can not add same course twice!", "Warning", 0);
-        }
-
-        // MODIFIES: this
-        // EFFECTS: produce a message dialog for entering non-positive course credit
-        private void nonPositiveCourseCredit() {
-            warning();
-            JOptionPane.showMessageDialog(addButton,
-                    "You should have positive course credit!", "Warning", 0);
         }
 
         // MODIFIES: this
