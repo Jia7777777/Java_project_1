@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class GUI extends JPanel implements ListSelectionListener {
@@ -246,27 +247,44 @@ public class GUI extends JPanel implements ListSelectionListener {
         // EFFECTS: do add
         @Override
         public void actionPerformed(ActionEvent e) {
-            String name = courseName.getText();
-            int credit = Integer.valueOf(courseCredit.getText());
-            Course addCourse = new Course(name, credit);
+            if (courseName.getText().isBlank()) {
+                emptyCourseName();
+                return;
+            }
+            try {
+                Integer.parseInt(courseCredit.getText());
+            } catch (NumberFormatException exception) {
+                invalidCourseCredit();
+                return;
+            }
+            Course addCourse = new Course(courseName.getText(), Integer.parseInt(courseCredit.getText()));
             List<Course> courses = courseList.getCourseList();
             boolean result = false;
             for (Course next : courses) {
-                if (next.getName().equals(name) && next.getCredit() == credit) {
+                if (next.getName().equals(courseName.getText())
+                        && next.getCredit() == Integer.parseInt(courseCredit.getText())) {
                     result = true;
                 }
             }
-            if (name.isBlank()) {
-                emptyCourseName();
-            } else if (credit <= 0) {
+            threeCases(addCourse, courses, result);
+        }
+
+        private void threeCases(Course addCourse, List<Course> courses, boolean result) {
+            if (Integer.parseInt(courseCredit.getText()) <= 0) {
                 nonPositiveCourseCredit();
             } else if (result) {
                 addSameCourseTwice();
             } else {
                 courses.add(addCourse);
-                listModel.addElement(name + " " + courseCredit.getText() + " Unregistered");
+                listModel.addElement(courseName.getText() + " " + courseCredit.getText() + " Unregistered");
                 reset();
             }
+        }
+
+        private void invalidCourseCredit() {
+            warning();
+            JOptionPane.showMessageDialog(addButton,
+                    "Invalid Course Credit!", "Warning", 0);
         }
 
         // MODIFIES: this
@@ -358,7 +376,7 @@ public class GUI extends JPanel implements ListSelectionListener {
         // MODIFIES: this
         // EFFECTS: handle both text field are empty
         private boolean handleEmptyTextField(DocumentEvent e) {
-            if (e.getDocument().getLength() <= 0) {
+            if (courseName.getText().length() == 0 && courseCredit.getText().length() == 0) {
                 button.setEnabled(false);
                 alreadyEnabled = false;
                 return true;
