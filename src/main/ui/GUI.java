@@ -39,6 +39,7 @@ public class GUI extends JPanel implements ListSelectionListener {
     private JsonReader jsonReader;
     private JsonWriter jsonWriter;
 
+    // EFFECTS: set up GUI
     public GUI() {
         super(new BorderLayout());
 
@@ -235,6 +236,7 @@ public class GUI extends JPanel implements ListSelectionListener {
         private boolean alreadyEnabled = false;
         private JButton button;
 
+        // EFFECTS: initialize button
         public AddListener(JButton button) {
             this.button = button;
         }
@@ -271,6 +273,10 @@ public class GUI extends JPanel implements ListSelectionListener {
             threeCases(addCourse, courses, result);
         }
 
+        // MODIFIES: this
+        // EFFECTS: if the course credit is <= 0, produce nonPositiveCourseCredit();
+        //          if add same course twice, produce addSameCourseTwice();
+        //          otherwise, general add course and reset JTextField
         private void threeCases(Course addCourse, List<Course> courses, boolean result) {
             if (Integer.parseInt(courseCredit.getText()) <= 0) {
                 nonPositiveCourseCredit();
@@ -284,6 +290,8 @@ public class GUI extends JPanel implements ListSelectionListener {
             }
         }
 
+        // MODIFIES: this
+        // EFFECTS: produce a message dialog for entering invalid course credit
         private void invalidCourseCredit() {
             warning();
             JOptionPane.showMessageDialog(addButton,

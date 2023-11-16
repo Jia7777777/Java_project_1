@@ -1,52 +1,12 @@
 {"courseList": [
     {
-        "name": "a",
+        "name": "c",
+        "credit": 1,
+        "status": false
+    },
+    {
+        "name": "h",
         "credit": 2,
-        "status": false
-    },
-    {
-        "name": "b",
-        "credit": 1,
-        "status": false
-    },
-    {
-        "name": "f",
-        "credit": 2,
-        "status": false
-    },
-    {
-        "name": "s",
-        "credit": 1,
-        "status": false
-    },
-    {
-        "name": "cs  a",
-        "credit": 1,
-        "status": false
-    },
-    {
-        "name": "g",
-        "credit": 3,
-        "status": false
-    },
-    {
-        "name": "fff",
-        "credit": 1,
-        "status": false
-    },
-    {
-        "name": "w",
-        "credit": 1,
-        "status": false
-    },
-    {
-        "name": "dd",
-        "credit": 1,
-        "status": false
-    },
-    {
-        "name": "vvv",
-        "credit": 11,
         "status": false
     }
 ]}
