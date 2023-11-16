@@ -189,9 +189,11 @@ public class GUI extends JPanel implements ListSelectionListener {
                 courseList = jsonReader.read();
                 for (Course next : courseList.getCourseList()) {
                     if (next.getStatus()) {
-                        listModel.addElement(next.getName() + " " + next.getCredit() + " Registered");
+                        listModel.addElement("Course Name: " + next.getName()
+                                + ", Course Credit: " + next.getCredit() + ", Course Status: Registered");
                     } else {
-                        listModel.addElement(next.getName() + " " + next.getCredit() + " Unregistered");
+                        listModel.addElement("Course Name: " + next.getName()
+                                + ", Course Credit: " + next.getCredit() + ", Course Status: Unregistered");
                     }
                 }
             } catch (IOException exception) {
@@ -276,7 +278,8 @@ public class GUI extends JPanel implements ListSelectionListener {
                 addSameCourseTwice();
             } else {
                 courses.add(addCourse);
-                listModel.addElement(courseName.getText() + " " + courseCredit.getText() + " Unregistered");
+                listModel.addElement("Course Name: " + courseName.getText()
+                        + ", Course Credit: " + courseCredit.getText() + ", Course Status: Unregistered");
                 reset();
             }
         }
