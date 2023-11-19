@@ -17,7 +17,6 @@ import java.awt.event.ActionListener;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.List;
 
 public class GUI extends JPanel implements ListSelectionListener {
@@ -149,12 +148,6 @@ public class GUI extends JPanel implements ListSelectionListener {
 
     class SaveListener implements ActionListener {
 
-        /**
-         * Invoked when an action occurs.
-         *
-         * @param e the event to be processed
-         */
-
         // MODIFIES: this
         // EFFECTS: do save
         @Override
@@ -174,12 +167,6 @@ public class GUI extends JPanel implements ListSelectionListener {
     }
 
     class LoadListener implements ActionListener {
-
-        /**
-         * Invoked when an action occurs.
-         *
-         * @param e the event to be processed
-         */
 
         // MODIFIES: this
         // EFFECTS: do load
@@ -205,12 +192,6 @@ public class GUI extends JPanel implements ListSelectionListener {
 
 
     class RemoveListener implements ActionListener {
-
-        /**
-         * Invoked when an action occurs.
-         *
-         * @param e the event to be processed
-         */
 
         // MODIFIES: this
         // EFFECTS: do remove
@@ -241,12 +222,6 @@ public class GUI extends JPanel implements ListSelectionListener {
             this.button = button;
         }
 
-        /**
-         * Invoked when an action occurs.
-         *
-         * @param e the event to be processed
-         */
-
         // MODIFIES: this
         // EFFECTS: do add
         @Override
@@ -274,7 +249,7 @@ public class GUI extends JPanel implements ListSelectionListener {
         }
 
         // MODIFIES: this
-        // EFFECTS: if the course credit is <= 0, produce nonPositiveCourseCredit();
+        // EFFECTS: if the course credit is <= 0, produce invalidCourseCredit();
         //          if add same course twice, produce addSameCourseTwice();
         //          otherwise, general add course and reset JTextField
         private void threeCases(Course addCourse, List<Course> courses, boolean result) {
@@ -333,34 +308,22 @@ public class GUI extends JPanel implements ListSelectionListener {
             courseCredit.setText("");
         }
 
-        /**
-         * Gives notification that there was an insert into the document.  The
-         * range given by the DocumentEvent bounds the freshly inserted region.
-         *
-         * @param e the document event
-         */
+        // MODIFIES: this
+        // EFFECTS: Gives notification that there was an insert into the document
         @Override
         public void insertUpdate(DocumentEvent e) {
             enableButton();
         }
 
-        /**
-         * Gives notification that a portion of the document has been
-         * removed.  The range is given in terms of what the view last
-         * saw (that is, before updating sticky positions).
-         *
-         * @param e the document event
-         */
+        // MODIFIES: this
+        // EFFECTS: Gives notification that a portion of the document has been removed
         @Override
         public void removeUpdate(DocumentEvent e) {
             handleEmptyTextField(e);
         }
 
-        /**
-         * Gives notification that an attribute or set of attributes changed.
-         *
-         * @param e the document event
-         */
+        // MODiFIES: this
+        // EFFECTS: Gives notification that an attribute or set of attributes changed
         @Override
         public void changedUpdate(DocumentEvent e) {
             if (!handleEmptyTextField(e)) {
@@ -388,11 +351,9 @@ public class GUI extends JPanel implements ListSelectionListener {
         }
     }
 
-    /**
-     * Called whenever the value of the selection changes.
-     *
-     * @param e the event that characterizes the change.
-     */
+
+    // MODIFIES: this
+    // EFFECTS: Called whenever the value of the selection changes
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {

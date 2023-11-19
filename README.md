@@ -22,10 +22,14 @@ Because it can help students to check their course planning.
 - As a user, I want to be able to be able to load **my course list** from file (if I choose)
 
 ### Instructions for Grader
-- You can generate the first required action related to the user story ""
-- You can generate the second required action related to the user story ""
+- You can generate the first required action related to the user story 
+"adding course to course list" by entering course name in the first text box, 
+entering course credit in the second text box and clicking add button. 
+- You can generate the second required action related to the user story 
+"removing course from course list" by selecting the course you want to remove 
+and clicking remove button. 
 - You can locate my visual component by clicking data file and then clicking image file under data file
-and there is an icon.png which is my visual component
-- You can save the state of my application by clicking save button
-- You can reload the state of my application by clicking load button
+and there is an icon.png which is my visual component.
+- You can save the state of my application by clicking save button.
+- You can reload the state of my application by clicking load button.
  
