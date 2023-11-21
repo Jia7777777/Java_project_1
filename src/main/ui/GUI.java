@@ -197,13 +197,17 @@ public class GUI extends JPanel implements ListSelectionListener {
         // EFFECTS: do remove
         @Override
         public void actionPerformed(ActionEvent e) {
-            //This method can be called only if
-            //there's a valid selection
-            //so go ahead and remove whatever's selected.
+
             int index = list.getSelectedIndex();
-            listModel.remove(index);
             List<Course> courses = courseList.getCourseList();
-            courses.remove(index);
+
+            if (!courses.get(index).getStatus()) {
+                listModel.remove(index);
+                courses.remove(index);
+            } else {
+                JOptionPane.showMessageDialog(removeButton, "You can not remove registered course!",
+                        "Warning", 0);
+            }
 
             int size = listModel.getSize();
 
