@@ -124,8 +124,10 @@ public class GUI extends JPanel implements ListSelectionListener {
                 BoxLayout.LINE_AXIS));
         buttonPane.add(removeButton);
         setBoundary(buttonPane);
+        buttonPane.add(new JLabel("Name: "));
         buttonPane.add(courseName);
         buttonPane.add(Box.createHorizontalStrut(5));
+        buttonPane.add(new JLabel("Credit: "));
         buttonPane.add(courseCredit);
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(addButton);
