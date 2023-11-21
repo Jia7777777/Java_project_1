@@ -236,32 +236,25 @@ public class GUI extends JPanel implements ListSelectionListener {
                 invalidCourseCredit();
                 return;
             }
-            Course addCourse = new Course(courseName.getText(), Integer.parseInt(courseCredit.getText()));
-            List<Course> courses = courseList.getCourseList();
-            boolean result = false;
-            for (Course next : courses) {
-                if (next.getName().equals(courseName.getText())
-                        && next.getCredit() == Integer.parseInt(courseCredit.getText())) {
-                    result = true;
-                }
+            if (Integer.parseInt(courseCredit.getText()) <= 0) {
+                invalidCourseCredit();
+                return;
             }
-            threeCases(addCourse, courses, result);
+            Course addCourse = new Course(courseName.getText(), Integer.parseInt(courseCredit.getText()));
+            boolean addSuccessfully = courseList.addCourse(addCourse);
+            twoCases(addSuccessfully);
         }
 
         // MODIFIES: this
-        // EFFECTS: if the course credit is <= 0, produce invalidCourseCredit();
-        //          if add same course twice, produce addSameCourseTwice();
+        // EFFECTS: if add same course twice, produce addSameCourseTwice();
         //          otherwise, general add course and reset JTextField
-        private void threeCases(Course addCourse, List<Course> courses, boolean result) {
-            if (Integer.parseInt(courseCredit.getText()) <= 0) {
-                invalidCourseCredit();
-            } else if (result) {
-                addSameCourseTwice();
-            } else {
-                courses.add(addCourse);
+        private void twoCases(boolean addSuccessfully) {
+            if (addSuccessfully) {
                 listModel.addElement("Course Name: " + courseName.getText()
                         + ", Course Credit: " + courseCredit.getText() + ", Course Status: Unregistered");
                 reset();
+            } else {
+                addSameCourseTwice();
             }
         }
 
@@ -294,9 +287,7 @@ public class GUI extends JPanel implements ListSelectionListener {
         private void warning() {
             Toolkit.getDefaultToolkit().beep();
             courseName.requestFocusInWindow();
-            courseName.selectAll();
             courseCredit.requestFocusInWindow();
-            courseCredit.selectAll();
         }
 
         // MODIFIES: this
