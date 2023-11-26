@@ -19,6 +19,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+// GUI is inspired by
+// https://docs.oracle.com/javase/tutorial/uiswing/examples/zipfiles/components-ListDemoProject.zip
 public class GUI extends JPanel implements ListSelectionListener {
     private JList list;
     private DefaultListModel listModel;
@@ -201,11 +203,11 @@ public class GUI extends JPanel implements ListSelectionListener {
         public void actionPerformed(ActionEvent e) {
 
             int index = list.getSelectedIndex();
-            List<Course> courses = courseList.getCourseList();
+            Course expected = courseList.getCourseList().get(index);
+            boolean result = courseList.removeCourse(expected);
 
-            if (!courses.get(index).getStatus()) {
+            if (result) {
                 listModel.remove(index);
-                courses.remove(index);
             } else {
                 JOptionPane.showMessageDialog(removeButton, "You can not remove registered course!",
                         "Warning", 0);
