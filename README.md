@@ -47,3 +47,6 @@ Add <Course name: CPSC121 Course credit: 4 Course status: Unregistered> to the c
 Sun Nov 26 15:53:25 PST 2023
 
 Remove <Course name: CPSC121 Course credit: 4 Course status: Unregistered> from the course list!
+
+### Phase 4: Task 3
+
