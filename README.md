@@ -49,4 +49,8 @@ Sun Nov 26 15:53:25 PST 2023
 Remove <Course name: CPSC121 Course credit: 4 Course status: Unregistered> from the course list!
 
 ### Phase 4: Task 3
-
+1. Refactoring: I will design a NonPositiveCredit exception in the future 
+for Course class. Reason: To make constructor: Course() more robust.
+2. Refactoring: I will design a Registered exception in the future
+   for CourseList class. Reason: To make method: addCourse(), removeCourse() more robust.
+3. 
