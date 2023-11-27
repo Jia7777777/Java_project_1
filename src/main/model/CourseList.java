@@ -32,6 +32,8 @@ public class CourseList implements Writable {
         }
         if (!result) {
             this.courseList.add(c);
+            EventLog.getInstance().logEvent(new Event("Add" + " <Course name: " + c.getName()
+                    + " Course credit: " + c.getCredit() + " Course status: Unregistered> to the course list!"));
             return true;
         } else {
             return false;
@@ -57,6 +59,8 @@ public class CourseList implements Writable {
         }
         if (result) {
             this.courseList.remove(pos);
+            EventLog.getInstance().logEvent(new Event("Remove" + " <Course name: " + c.getName()
+                    + " Course credit: " + c.getCredit() + " Course status: Unregistered> from the course list!"));
             return true;
         } else {
             return false;

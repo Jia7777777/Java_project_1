@@ -2,6 +2,8 @@ package ui;
 
 import model.Course;
 import model.CourseList;
+import model.Event;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -29,11 +31,13 @@ public class GUI extends JPanel implements ListSelectionListener {
     private static final String removeString = "Remove";
     private static final String saveString = "Save";
     private static final String loadString = "Load";
+    private static final String quitString = "Quit";
     private static final String JSON_STORE_GUI = "./data/courseListGUI.json";
     private JButton addButton;
     private JButton removeButton;
     private JButton saveButton;
     private JButton loadButton;
+    private JButton quitButton;
     private JTextField courseName;
     private JTextField courseCredit;
     private CourseList courseList;
@@ -65,9 +69,19 @@ public class GUI extends JPanel implements ListSelectionListener {
 
         setLoadButton();
 
+        setQuitButton();
+
         setJTextField(addListener);
 
         createPanel(listScrollPane);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: set up quit button
+    private void setQuitButton() {
+        quitButton = new JButton(quitString);
+        quitButton.setActionCommand(quitString);
+        quitButton.addActionListener(new QuitListener());
     }
 
     // MODIFIES: this
@@ -137,6 +151,8 @@ public class GUI extends JPanel implements ListSelectionListener {
         buttonPane.add(saveButton);
         setBoundary(buttonPane);
         buttonPane.add(loadButton);
+        setBoundary(buttonPane);
+        buttonPane.add(quitButton);
         buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         add(listScrollPane, BorderLayout.CENTER);
         add(buttonPane, BorderLayout.PAGE_END);
@@ -148,6 +164,20 @@ public class GUI extends JPanel implements ListSelectionListener {
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
         buttonPane.add(Box.createHorizontalStrut(5));
+    }
+
+    class QuitListener implements ActionListener {
+
+        // MODIFIES: this
+        // EFFECTS: do quit
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            for (Event next : EventLog.getInstance()) {
+                System.out.println(next.toString());
+            }
+            EventLog.getInstance().clear();
+            System.exit(0);
+        }
     }
 
     class SaveListener implements ActionListener {

@@ -33,3 +33,17 @@ and there is an icon.png which is my visual component.
 - You can save the state of my application by clicking save button.
 - You can reload the state of my application by clicking load button.
  
+### Phase 4: Task 2
+This is a representative sample of events. 
+
+Sun Nov 26 15:53:16 PST 2023
+
+Add <Course name: CPSC110 Course credit: 4 Course status: Unregistered> to the course list!
+
+Sun Nov 26 15:53:23 PST 2023
+
+Add <Course name: CPSC121 Course credit: 4 Course status: Unregistered> to the course list!
+
+Sun Nov 26 15:53:25 PST 2023
+
+Remove <Course name: CPSC121 Course credit: 4 Course status: Unregistered> from the course list!
