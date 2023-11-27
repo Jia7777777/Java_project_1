@@ -172,8 +172,11 @@ public class GUI extends JPanel implements ListSelectionListener {
         // EFFECTS: do quit
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("EventLog:");
+            System.out.println("");
             for (Event next : EventLog.getInstance()) {
                 System.out.println(next.toString());
+                System.out.println("");
             }
             EventLog.getInstance().clear();
             System.exit(0);

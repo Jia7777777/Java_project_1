@@ -1,6 +1,8 @@
 package persistence;
 
 import model.CourseList;
+import model.Event;
+import model.EventLog;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -39,6 +41,7 @@ public class JsonWriter {
     // EFFECTS: closes writer
     public void close() {
         writer.close();
+        EventLog.getInstance().logEvent(new Event("Save course list to file!"));
     }
 
     // MODIFIES: this
