@@ -69,10 +69,10 @@ public class JsonReader {
         boolean status = jsonObject.getBoolean("status");
         Course course = new Course(name, credit);
         if (course.getStatus() == status) {
-            cl.addCourse(course);
+            cl.getCourseList().add(course);
         } else {
             course.markCourseAsRegistered();
-            cl.addCourse(course);
+            cl.getCourseList().add(course);
         }
 
     }

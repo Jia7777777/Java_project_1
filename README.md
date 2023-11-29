@@ -36,23 +36,19 @@ and there is an icon.png which is my visual component.
 ### Phase 4: Task 2
 EventLog:
 
-Mon Nov 27 09:39:36 PST 2023
+Wed Nov 29 13:30:16 PST 2023
 
 Load course list from file!
 
-Mon Nov 27 09:39:36 PST 2023
-
-Add <Course name: CPSC110 Course credit: 4 Course status: Unregistered> to the course list!
-
-Mon Nov 27 09:39:48 PST 2023
+Wed Nov 29 13:30:22 PST 2023
 
 Add <Course name: CPSC121 Course credit: 4 Course status: Unregistered> to the course list!
 
-Mon Nov 27 09:39:50 PST 2023
+Wed Nov 29 13:30:25 PST 2023
 
 Remove <Course name: CPSC110 Course credit: 4 Course status: Unregistered> from the course list!
 
-Mon Nov 27 09:39:54 PST 2023
+Wed Nov 29 13:30:29 PST 2023
 
 Save course list to file!
 ### Phase 4: Task 3

@@ -14,8 +14,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -165,6 +164,7 @@ public class GUI extends JPanel implements ListSelectionListener {
         buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
         buttonPane.add(Box.createHorizontalStrut(5));
     }
+
 
     class QuitListener implements ActionListener {
 
@@ -407,6 +407,19 @@ public class GUI extends JPanel implements ListSelectionListener {
         //Create and set up the window.
         JFrame frame = new JFrame("CoursePlanning");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("EventLog:");
+                System.out.println("");
+                for (Event next : EventLog.getInstance()) {
+                    System.out.println(next.toString());
+                    System.out.println("");
+                }
+                EventLog.getInstance().clear();
+            }
+        });
+
 
         //Create and set up the content pane.
         JComponent newContentPane = new GUI();
