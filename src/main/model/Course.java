@@ -23,7 +23,6 @@ public class Course implements Writable {
         this.status = false;
     }
 
-
     // MODIFIES: this
     // EFFECTS: If status is unregistered, then change to registered and return "Course is successfully registered!".
     //          Otherwise, return "Course was registered in the past and nothing changes now.".
@@ -35,7 +34,6 @@ public class Course implements Writable {
             return SENTENCE2;
         }
     }
-
 
     // MODIFIES: this
     // EFFECTS: If status is registered, then change to unregistered and return "Course is unregistered.".
